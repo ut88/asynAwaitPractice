@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const preMovie = async()=>{
+            const promiseWifeBringingTicks= new Promise((resolve,reject)=>{
+                setTimeout(()=>resolve('ticket'),3000)
+            })
+            let getPopcorn=new Promise((resolve,reject)=>resolve('popcorn'))
+            let addButter =new Promise((resolve,reject)=>resolve('butter'))
+            let getColdDrink=  new Promise((resolve,reject)=>resolve('get cold drink'))
+            let getColdDrink1=await getColdDrink;
+            let ticket =await promiseWifeBringingTicks;
+    
+                console.log('wife:i have ticket')
+                console.log('husband:we should go in')
+                console.log('wife:no i am hungary')
+
+                const Popcorn=await getPopcorn;
+             
+                console.log(`husband:i got some ${Popcorn}`); 
+                console.log('husband:we should go in')
+                console.log('wife:I need butter on my popcorn')
+            
+                let butter=await addButter;
+                
+                console.log(`husband:i got some ${butter}`); 
+                console.log('husband:anything else darling')
+                console.log('wife:let go we getting late')
+                console.log('husband: thanku for reminder');
+                console.log(`Please ${getColdDrink1}`) 
+
+                let [popcorn,Butter,ColdDrink]=await Promise.all([getPopcorn,addButter,getColdDrink])
+
+                console.log(`${popcorn} ${butter} ${ColdDrink}`)
+                
+            return ticket;
+        }
+        preMovie().then((m)=>console.log(`Person 3 show ${m}`))
+        const posting=async()=>{
+            const posts=[{title: 'Post First', body: 'This is Post First'},
+               {title: 'Post Second', body: 'This is Post Second'}]
+        function createpost(post){
+           return new Promise((resolve,reject)=>{
+        const t=true;
+        if(t){
+        // posts.push(post);
+        resolve(posts.push(post));
+        }else{
+            reject('ERROR');
+        }
+       })
+}
+        function getpost(){
+            return new Promise((resolve,reject)=>{
+                let output='';
+         for(let i=0;i<posts.length;i++){
+        output+=`<li>${posts[i].title}</li>`;
+         }
+           resolve(document.body.innerHTML=output)
+            })
+         
+      }
+      function deletepost(){
+      return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+        const t=true;
+        if(t){
+        // posts.pop();
+        resolve(posts.pop());
+        }else{
+         reject('ERROR');
+        }
+        },5000)
+        
+     })
+}
+       function updateLastUserActivityTime(){
+          return new Promise((resolve,reject)=>{
+          setTimeout(()=>{
+          posts.body=new Date().getTime();
+           resolve(posts.body);
+            },1000);
+         })
+        }
+      let[get,createpos,update,delet] =await Promise.all([getpost(),createpost({title: 'Post Five', body: 'This is Post Five'}),updateLastUserActivityTime()
+,deletepost()])
+        //   getpost();
+          return console.log(`${get} ${createpos},${update},${delet}`)
+        }
+        posting();
+    </script>
+</body>
+</html>
